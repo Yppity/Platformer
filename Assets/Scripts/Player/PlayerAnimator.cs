@@ -14,12 +14,24 @@ public class PlayerAnimator : MonoBehaviour
         _playerMover = GetComponent<PlayerMover>();
     }
 
+    private void OnEnable()
+    {
+        _playerMover.Jumped += HandleJumped;
+    }
+
     private void Update()
     {
         _animator.SetBool("IsMoved", _playerMover.IsMoved);
         _animator.SetBool("IsRunning", _playerMover.IsRunning);
+    }
 
-        if (_playerMover.JumpStarted)
-            _animator.SetTrigger("Jump");
+    private void OnDisable()
+    {
+        _playerMover.Jumped -= HandleJumped;
+    }
+
+    private void HandleJumped()
+    {
+        _animator.SetTrigger("Jump");
     }
 }

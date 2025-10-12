@@ -2,26 +2,25 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 
-public class LandedCheck : MonoBehaviour
+public class GroundDetector : MonoBehaviour
 {
-    private bool _isLanded = false;
-
-    public bool IsLanded => _isLanded;
+    public bool IsGrounded { get; private set; }
 
     private void Awake()
     {
         GetComponent<Collider2D>().isTrigger = true;
+        IsGrounded = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.isTrigger == false)
-            _isLanded = true;
+            IsGrounded = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.isTrigger == false)
-            _isLanded = false;
+            IsGrounded = false;
     }
 }

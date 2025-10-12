@@ -15,8 +15,6 @@ public class CoinSpawner : MonoBehaviour
     private List<Transform> _currentSpawnPoints = new List<Transform>();
     private Coroutine _spawnCoroutine = null;
 
-    public event Action CoinCollected;
-
     private void Awake()
     {
         _coinPool = new ObjectPool<Coin>(
@@ -72,7 +70,6 @@ public class CoinSpawner : MonoBehaviour
     private void HandleCoinCollected(Coin coin)
     {
         _coinPool.Release(coin);
-        CoinCollected?.Invoke();
         TryStartSpawnRoutine();
     }
 
