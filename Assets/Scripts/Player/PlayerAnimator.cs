@@ -1,37 +1,38 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(PlayerMover))]
 
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator _animator;
-    private PlayerMover _playerMover;
+    private bool _currentIsMoved = false;
+    private bool _currentIsRunning = false;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _playerMover = GetComponent<PlayerMover>();
     }
 
-    private void OnEnable()
+    public void Jump()
     {
-        _playerMover.Jumped += HandleJumped;
+        _animator.SetTrigger(PlayerAnimatorData.Params.Jump);
     }
 
-    private void Update()
+    public void SetIsMoved(bool isMoved)
     {
-        _animator.SetBool("IsMoved", _playerMover.IsMoved);
-        _animator.SetBool("IsRunning", _playerMover.IsRunning);
+        if (_currentIsMoved == isMoved)
+            return;
+
+        _currentIsMoved = isMoved;
+        _animator.SetBool(PlayerAnimatorData.Params.IsMoved, isMoved);
     }
 
-    private void OnDisable()
+    public void SetIsRunning(bool isRunning)
     {
-        _playerMover.Jumped -= HandleJumped;
-    }
-
-    private void HandleJumped()
-    {
-        _animator.SetTrigger("Jump");
+        if (_currentIsRunning == isRunning)
+            return;
+         
+        _currentIsRunning = isRunning;
+        _animator.SetBool(PlayerAnimatorData.Params.IsRunning, isRunning);
     }
 }

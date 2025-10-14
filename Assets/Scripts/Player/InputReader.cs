@@ -16,7 +16,7 @@ public class InputReader : MonoBehaviour
     private void Update()
     {
         MoveX = Input.GetAxisRaw(HorizontalAxis);
-        IsRunKeyDown = Input.GetKeyDown(_runKey);
+        IsRunKeyDown = Input.GetKey(_runKey);
 
         if (Input.GetKeyDown(_jumpKey))
             JumpKeyPressed?.Invoke();
