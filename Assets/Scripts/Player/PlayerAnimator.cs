@@ -18,6 +18,11 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetTrigger(PlayerAnimatorData.Params.Jump);
     }
 
+    public void Attack()
+    {
+        _animator.SetTrigger(PlayerAnimatorData.Params.Attack);
+    }
+
     public void SetIsMoved(bool isMoved)
     {
         if (_currentIsMoved == isMoved)

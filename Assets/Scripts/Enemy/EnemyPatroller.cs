@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class Patroller : MonoBehaviour
+public class EnemyPatroller : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private Transform _currentTarget;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +26,7 @@ public class CoinSpawner : MonoBehaviour
 
     private void InitializeCoin(Coin coin)
     {
-        coin.gameObject.SetActive(true);
+        coin.Reset();
         coin.transform.position = GetRandomSpawnPoint();
         coin.PlayerCollisionCoin += HandleCoinCollected;
 
@@ -36,7 +35,7 @@ public class CoinSpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPoint()
     {
-        int index = UnityEngine.Random.Range(0, _currentSpawnPoints.Count);
+        int index = Random.Range(0, _currentSpawnPoints.Count);
         Vector3 spawnPointPosition = _currentSpawnPoints[index].position;
         _currentSpawnPoints.RemoveAt(index);
 

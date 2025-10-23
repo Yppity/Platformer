@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public bool IsCollected { get; private set; } = false;
+
     public event Action<Coin> PlayerCollisionCoin;
 
     private void Awake()
@@ -12,13 +14,15 @@ public class Coin : MonoBehaviour
         GetComponent<CircleCollider2D>().isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Reset()
     {
-        if (collision.TryGetComponent(out Collector collector))
-        {
-            collector.CoinCollected();
+        IsCollected = false;
+        gameObject.SetActive(true);
+    }
 
-            PlayerCollisionCoin?.Invoke(this);
-        }
+    public void Destroy()
+    {
+        IsCollected = true;
+        PlayerCollisionCoin?.Invoke(this);
     }
 }

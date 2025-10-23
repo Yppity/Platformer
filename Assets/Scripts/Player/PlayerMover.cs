@@ -13,7 +13,7 @@ public class PlayerMover : MonoBehaviour
 
     public bool TryMove(float moveX, float speed, float runMultiplier, bool isRunKeyDown, bool isGrounded)
     {
-        if (isGrounded == false || moveX == 0)
+        if (moveX == 0 || isGrounded == false)
             return false;
 
         float currentSpeed = isRunKeyDown ? speed * runMultiplier : speed;

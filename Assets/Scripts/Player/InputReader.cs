@@ -7,11 +7,13 @@ public class InputReader : MonoBehaviour
 
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode _attackKey = KeyCode.F;
 
     public float MoveX { get; private set; }
     public bool IsRunKeyDown { get; private set; }
 
-    public Action JumpKeyPressed;
+    public event Action JumpKeyPressed;
+    public event Action AttackKeyPressed;
 
     private void Update()
     {
@@ -20,5 +22,8 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(_jumpKey))
             JumpKeyPressed?.Invoke();
+
+        if (Input.GetKeyDown(_attackKey))
+            AttackKeyPressed?.Invoke();
     }
 }
